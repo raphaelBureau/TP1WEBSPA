@@ -60,7 +60,7 @@ async function renderBookmarks(categorie = "") {
                 $("#content").append(renderBookmark(bookmark));
             }
         });
-        RenderCategories(categorieArray);
+        RenderCategories(categorieArray,categorie);
         restoreContentScrollPosition();
         // Attached click events on command icons
         $(".editCmd").on("click", function () {
@@ -273,12 +273,16 @@ function RootUrl(url = "") {
     return url.substring(0, start + end);
 }
 
-function RenderCategories(categorieArray = []) {
+function RenderCategories(categorieArray = [],checked = "") {
     $('#CategoriesDropDown').empty();
     categorieArray.forEach((cat) => {
+        let content = "";
+        if(cat == checked) {
+            content = "menuIcon fa fa-check";
+        }
         $('#CategoriesDropDown').append(
             `<div class="dropdown-item" id="loginCmd" onclick="renderBookmarks('` + cat + `');">
-    <i class="mx-2"></i> `+ cat + `
+     `+ cat + ` <i class="${content} mx-2"></i>
 </div>`
         )
     });
